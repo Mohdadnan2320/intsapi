@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%=title%></title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+</head>
+<body>
+
+  <form class="row g-3 m-5">
+    <div class="col-auto">
+      <label for="forname">Enter name to search</label>
+    </div>
+    <div class="col-auto">
+      <label for="Search" class="visually-hidden">Search</label>
+      <input type="password" class="form-control" id="inputPassword2" placeholder="Search">
+    </div>
+    <div class="col-auto">
+      <button type="submit" class="btn btn-primary mb-3 submit">See reults</button>
+    </div>
+  </form>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.15.3/axios.min.js"></script> -->
+  <script>
+    function setupInsta(){
+	let appId = "432176562182095";
+	let redUri = window.location.origin + "/insta";
+	let url = `https://api.instagram.com/oauth/authorize?client_id=${appId}&redirect_uri=${redUri}&scope=user_profile,user_media&response_type=code`;
+  window.open(url, "_blank").focus();
+}
+
+document.querySelector(".submit")
+.addEventListener("click", ()=>{
+  setupInsta();
+  console.log(url)
+
+})
+
+
+axios.post("/init-insta", {
+    code: 'code-query-param-from-url',
+    redirectUrl: 'redirect-url' // needs to be registered at fb developer console
+})
+.then(({ data }) => {
+    console.log(data)
+})
+  </script>
+  
+  
+</body>
+</html>
